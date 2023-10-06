@@ -1,3 +1,5 @@
+this is the most recent:
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +44,6 @@
         .right {
             width: 70%;
             padding: 20px;
-            margin-left: auto; /* Push the "Skills" section to the right */
         }
 
         h1,
@@ -198,4 +199,152 @@
                 <div class="cube" id="cube">
                     <div class="face"></div>
                     <div class="face"></div>
-                    <div class="face
+                    <div class="face"></div>
+                    <div class="face"></div>
+                    <div class="face"></div>
+                    <div class="face"></div>
+                    <div class="cube-text">BF</div>
+                </div>
+            </div>
+            <!-- End Cube Code -->
+            <section>
+                <h2><br></h2>
+                <h2><br></h2>
+                <h2><br></h2>
+                <h2>Contact</h2>
+                <ul>
+                    <li>Miami-Fort Lauderdale Area</li>
+                    <li><a href="mailto:bkaf@me.com">bkaf@me.com</a></li>
+                    <li>954-297-4891</li>
+                    <li><a href="https://linkedin.com/in/britten-falcher-897180185" target="_blank">linkedin.com/in/britten-falcher-897180185</a></li>
+                </ul>
+            </section>
+            <section>
+                <h2>Skills</h2>
+                <ul>
+                    <li><span class="bold">Technology:</span></li>
+                    <li>Desktop &amp; Server Administration</li>
+                    <li>Network Administration</li>
+                    <li>Microsoft Office Suite</li>
+                    <li>IFS ERP System</li>
+                    <li>HTML/CSS</li>
+                    <li><span class="bold">Operating Systems:</span></li>
+                    <li>Ubuntu</li>
+                    <li>Linux-based systems</li>
+                    <li>OSX</li>
+                    <li>Windows XP-10</li>
+                    <li>Windows Server 2003+</li>
+                    <li><span class="bold">Leadership:</span></li>
+                    <li>Military Service Experience</li>
+                    <li>JROTC</li>
+                    <li>IT management</li>
+                </ul>
+            </section>
+        </div>
+        <div class="right">
+            <header>
+                <h1>Britten Falcher</h1>
+            </header>
+            <section>
+                <h2>Objective</h2>
+                <p>Dedicated IT Director with over 8 years of experience in managing company servers, troubleshooting, and providing technical assistance. Aiming to leverage my skills and experience to effectively enhance operational efficiency and implement strategic IT initiatives.</p>
+            </section>
+            <section>
+                <h2>Professional Experience</h2>
+                <h3>Director of Information Technology <span class="company">- Uniweld Products, Inc.</span></h3>
+                <p class="date">Jul 2022 &ndash; Present (1 yr 4 mos)</p>
+                <ul>
+                    <li>Develop and maintain security policies, standards, &amp; procedures for endpoints, servers, and application systems.</li>
+                    <li>Analyze IT infrastructure &amp; systems performance to assess operating costs.</li>
+                    <li>Report technology architecture, roadmap, and capital investments with company Vice President.</li>
+                    <li>Develop and execute technology plans to enhance system reliability, efficiency &amp; security.</li>
+                    <li>Lead IT strategic and operational planning to achieve business goals by fostering innovation, prioritizing IT initiatives, and coordinating the evaluation, deployment, and management of current and future IT systems.</li>
+                </ul>
+                <h3>IT Manager <span class="company">- Uniweld Products, Inc.</span></h3>
+                <p class="date">Dec 2019 &ndash; Jul 2022 (2 yrs 8 mos)</p>
+                <ul>
+                    <li>Managed software and operating systems.</li>
+                    <li>Recruited and trained staff.</li>
+                    <li>Developed SOPs.</li>
+                    <li>Ensured server health and minimal downtime.</li>
+                    <li>Managed IT and product information management department.</li>
+                </ul>
+                <h3>IT Administrator <span class="company">- Uniweld Products, Inc.</span></h3>
+                <p class="date">Aug 2015 - Dec 2019 (4 yrs 4 mos)</p>
+                <ul>
+                    <li>Installed, maintained, and troubleshooted software and operating systems.</li>
+                    <li>Assembled and maintained PCs and servers.</li>
+                    <li>Managed Domain Controllers, Linux LAMP stack, File, and in-house email servers.</li>
+                    <li>Worked with Active Directory.</li>
+                    <li>Provided IFS ERP user administration.</li>
+                    <li>Implemented and troubleshooted CNC machinery.</li>
+                    <li>New employee onboarding.</li>
+                    <li>Provided helpdesk support.</li>
+                </ul>
+                <h3>Directory Service Technician <span class="company">- United States Air Force</span></h3>
+                <p class="date">May 2011 &ndash; September 2012 (1 yr 5 mos)</p>
+                <ul>
+                    <li>Conducted vulnerability scans.</li>
+                    <li>Maintained servers and networking infrastructure.</li>
+                    <li>Managed objects in the global active directory.</li>
+                    <li>Assisted with client problems through a trouble ticket system.</li>
+                    <li>Provided customer service.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Education</h2>
+                <ul>
+                    <li>Information Technology, 81st Training Wing Keesler AFB, 2011.</li>
+                    <li>High School Diploma, South Plantation High School, 2010.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Certifications</h2>
+                <p>CompTIA Security+, CompTIA, 2011 (Expired 2014).</p>
+                <p>Top Secret Security Clearance (Inactive), United States Air Force, 2010.</p>
+            </section>
+            <section>
+                <h2>References</h2>
+                <p>Available upon request.</p>
+            </section>
+        </div>
+    </div>
+    <script>
+    let angle = 45;
+    let speed = 0; // Initial speed set to 0
+    let isHovered = false;
+
+    function spinCube() {
+        if (speed > 0) {
+            angle += speed;
+            document.getElementById('cube').style.transform = `rotateX(-35deg) rotateY(${angle}deg)`;
+            requestAnimationFrame(spinCube);
+        }
+    }
+
+    document.querySelector('.cube-container').addEventListener('mouseenter', () => {
+        isHovered = true;
+        speed = 2; // Slower speed on hover
+        spinCube(); // Start spinning on hover
+    });
+
+    document.querySelector('.cube-container').addEventListener('mouseleave', () => {
+        isHovered = false;
+        // Gradually slow down to a stop
+        let slowDown = setInterval(() => {
+            speed -= 0.05; // Increase the decrement value to stop faster
+            if (speed <= 0) {
+                clearInterval(slowDown);
+                speed = 0; // Ensure speed doesn't go negative
+            }
+        }, 10); // Decrease the interval to stop faster
+    });
+
+    setInterval(() => {
+        if (isHovered && speed > 0.05) {
+            speed -= 0.01; // Gradually decrease speed while hovered
+        }
+    }, 100); // Adjust interval for smoother transition
+</script>
+</body>
+</html>
