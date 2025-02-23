@@ -221,16 +221,40 @@
             .dark-mode-toggle, .print-version-toggle { display: none !important; }
             .resume { box-shadow: none !important; margin: 0 !important; padding: 10px !important; border: none !important; }
             .cube-container { display: none !important; }
+
+            /* Hide the Skills section in the right column */
+            #skills {
+                display: none !important;
+            }
+
+            /* Show the Skills section in the left column */
+            #skills2 {
+                display: block !important;
+            }
+
+            /* Adjust the layout for printing */
+            .top-section {
+                flex-direction: column;
+            }
+
+            .left, .right {
+                width: 100%;
+                padding: 0;
+                border: none;
+            }
+
+            .left {
+                order: 2; /* Move the left column (with Skills) after the right column */
+            }
+
+            .right {
+                order: 1; /* Move the right column (with Summary) first */
+            }
         }
     
         footer { text-align: center; padding: 10px 0; margin-top: 20px; background-color: #333; color: #fff; }
         .dark-mode footer { background-color: #111; }
     </style>
-    
-    
-    
-    
-    
 </head>
 <body>
     <div class="container">
@@ -415,7 +439,5 @@
             }, 100);
         });
     </script>
-    
-    
 </body>
 </html>
