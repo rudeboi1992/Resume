@@ -1,449 +1,948 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Britten Falcher's Resume</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        /* Reset and Basic Styles */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            margin: 0;
-            padding: 0; 
-            line-height: 1.6; 
-            color: #333; 
-            background-color: #f8f8f8; 
-            transition: background-color 0.3s, color 0.3s; 
-            display: flex; 
-            flex-direction: column; 
-            min-height: 100vh; 
-        }
-        
-        /* Dark Mode Styling */
-        body.dark-mode {
-            background-color: #121212;
-            color: #d1d1d1; /* Slightly lighter text */
-        }
-        
-        body.dark-mode .resume {
-            background-color: #1e1e1e;
-            color: #d1d1d1; /* Slightly lighter text */
-        }
-        
-        body.dark-mode h1, 
-        body.dark-mode h2, 
-        body.dark-mode h3, 
-        body.dark-mode a {
-            color: #E74C3C;
-        }
-        
-        body.dark-mode ul.bullet-list li::before, 
-        body.dark-mode ul.skills li::before {
-            color: #E74C3C;
-        }
-        
-        body.dark-mode footer {
-            background-color: #111;
-            color: #fff;
-        }
-        
-        body.dark-mode .contact i {
-            color: #E74C3C;
-        }
-        
-        /* Container and Layout */
-        .container { 
-            max-width: 1024px; 
-            margin: 20px auto; 
-            padding: 20px; 
-            flex: 1; 
-        }
-        .resume {
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            padding: 40px;
-            max-width: 900px;
-            margin: 20px auto;
-        }
-    
-        .top-section {
-            display: flex;
-            margin-bottom: 40px;
-        }
-    
-        .left {
-            width: 30%;
-            border-right: 1px solid #ddd;
-            padding-right: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            gap: 20px;
-            padding-top: 20px;
-        }
-    
-        .info-section {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            align-items: flex-start;
-        }
-    
-        .right {
-            width: 70%;
-            padding-left: 30px;
-        }
-    
-        /* Typography */
-        h1, h2, h3 {
-            color: #000000; 
-        }
-        h1 { font-size: 2.2em; margin-bottom: 10px; }
-        h2 { font-size: 1.6em; margin-bottom: 10px; border-bottom: 1px solid #ddd; padding-bottom: 5px; color: #E74C3C; }
-        .dark-mode h2 { border-bottom: 1px solid #444; }
-        h3 { font-size: 1.2em; margin-bottom: 5px;  }
-        p, ul { margin-bottom: 15px; color: #555; transition: color 0.3s; }
-        .dark-mode p, .dark-mode ul { color: #b0b0b0; /* Lighter text */ }
-        a { color: #3498DB; text-decoration: none; transition: color 0.3s; }
-        a:hover { text-decoration: underline; }
-    
-        /* Lists */
-        ul { list-style: none; padding-left: 0; }
-        ul.bullet-list li::before, ul.skills li::before { 
-            content: "\2022"; 
-            color: #E74C3C; 
-            font-weight: bold; 
-            display: inline-block; 
-            width: 1em; 
-            margin-left: -1em; 
-        }
-    
-        /* Icons */
-        .contact i { margin-right: 10px; color: #E74C3C; transition: color 0.3s; }
-    
-        /* Buttons */
-        .dark-mode-toggle, .print-version-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #E74C3C;
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-            z-index: 100;
-        }
-        .print-version-toggle { top: 70px; }
-        .dark-mode-toggle:hover, .print-version-toggle:hover { transform: scale(1.1); background-color: #000000; }
-    
-        /* Cube Section */
-        .cube-container {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            perspective: 1000px;
-            margin: 20px auto;
-            margin-top: 40px;
-            margin-bottom: 40px;
-        }
-    
-        .cube {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            transform-style: preserve-3d;
-            transform: rotateX(0deg) rotateY(0deg);
-            transition: transform 3.3s ease-out;
-        }
-    
-        .cube .face {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            border: 1px solid #999999;
-            background: transparent;
-            transition: background-color 0.5s ease, border-color 0.5s ease;
-        }
-    
-        .dark-mode .cube .face {
-            border-color: #444;
-            background: transparent;
-        }
-    
-        .face:nth-child(1) { transform: rotateY(0deg) translateZ(50px); }
-        .face:nth-child(2) { transform: rotateX(90deg) translateZ(50px); }
-        .face:nth-child(3) { transform: rotateY(90deg) translateZ(50px); }
-        .face:nth-child(4) { transform: rotateY(180deg) translateZ(50px); }
-        .face:nth-child(5) { transform: rotateY(270deg) translateZ(50px); }
-        .face:nth-child(6) { transform: rotateX(-90deg) translateZ(50px); }
-    
-        .cube-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2em;
-            font-weight: bold;
-        }
-    
-        /* Media Queries */
-        @media (max-width: 768px) {
-            .top-section { flex-direction: column; }
-            .left, .right { width: 100%; padding: 20px; border: none; }
-            .left { border-bottom: 1px solid #ddd; margin-bottom: 20px; }
-            .dark-mode .left { border-bottom: 1px solid #444; }
-            #skills { display: block; }
-            #skills2 { display: none; }
-        }
-    
-        @media (min-width: 769px) {
-            #skills { display: none; }
-            #skills2 { display: block; }
-        }
-    
-        /* Print Styles */
-        @media print {
-            body { background-color: #fff !important; color: #000 !important; }
-            .dark-mode-toggle, .print-version-toggle { display: none !important; }
-            .resume { box-shadow: none !important; margin: 0 !important; padding: 10px !important; border: none !important; }
-            .cube-container { display: none !important; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Britten Falcher's Resume</title>
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+/>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
+rel="stylesheet"
+/>
+<style>
+/* Reset and Basic Styles */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+font-family: 'Roboto', Arial, sans-serif;
+margin: 0;
+padding: 0;
+line-height: 1.6;
+color: #333;
+background-color: #f8f8f8;
+transition: background-color 0.3s, color 0.3s;
+display: flex;
+flex-direction: column;
+min-height: 100vh;
+}
+/* Dark Mode Styling */
+body.dark-mode {
+background-color: #121212;
+color: #d1d1d1;
+}
+body.dark-mode .resume {
+background-color: #1e1e1e;
+color: #d1d1d1;
+}
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode a {
+color: #e74c3c;
+}
+body.dark-mode h3 .company,
+body.dark-mode h3 .date {
+color: #bca09a;
+}
+body.dark-mode ul.bullet-list li::before,
+body.dark-mode ul.skills li::before {
+color: #e74c3c;
+}
+body.dark-mode footer {
+background-color: #111;
+color: #fff;
+}
+body.dark-mode .contact i {
+color: #e74c3c;
+}
+/* Container and Layout */
+.container {
+max-width: 1024px;
+margin: 20px auto;
+padding: 20px;
+flex: 1;
+}
+.resume {
+background-color: #fff;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+border-radius: 12px;
+display: flex;
+flex-direction: column;
+padding: 40px;
+max-width: 900px;
+margin: 20px auto;
+}
+.top-section {
+display: flex;
+margin-bottom: 40px;
+}
+.left {
+width: 30%;
+border-right: 1px solid #ddd;
+padding-right: 30px;
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+gap: 20px;
+padding-top: 20px;
+}
+.dark-mode .left {
+border-right-color: #444;
+}
+.info-section {
+display: flex;
+flex-direction: column;
+gap: 20px;
+align-items: flex-start;
+}
+.right {
+width: 70%;
+padding-left: 30px;
+}
+/* Typography */
+h1,
+h2,
+h3 {
+color: #000000;
+}
+h1 {
+font-size: 2.2em;
+margin-bottom: 10px;
+text-align: center; /* Centering the name */
+}
+h2 {
+font-size: 1.6em;
+margin-bottom: 10px;
+border-bottom: 1px solid #ddd;
+padding-bottom: 5px;
+color: #e74c3c;
+}
+.dark-mode h2 {
+border-bottom: 1px solid #444;
+}
+h3 {
+font-size: 1.2em;
+margin-bottom: 5px;
+}
+h3 .company,
+h3 .date {
+font-size: 0.9em;
+font-weight: 400;
+color: #555;
+display: block;
+margin-top: 2px;
+}
+h3 .company {
+font-style: italic;
+}
+p,
+ul {
+margin-bottom: 15px;
+color: #555;
+transition: color 0.3s;
+}
+.dark-mode p,
+.dark-mode ul {
+color: #b0b0b0;
+}
+a {
+color: #3498db;
+text-decoration: none;
+transition: color 0.3s;
+}
+a:hover {
+text-decoration: underline;
+}
+/* Lists */
+ul {
+list-style: none;
+padding-left: 0;
+}
+ul.bullet-list li,
+ul.skills li {
+padding-left: 1.5em;
+position: relative;
+margin-bottom: 0.5em;
+}
+ul.bullet-list li::before,
+ul.skills li::before {
+content: "\2022";
+color: #e74c3c;
+font-weight: bold;
+display: inline-block;
+position: absolute;
+left: 0;
+}
+ul.skills li strong {
+display: block;
+margin-bottom: 0.2em;
+}
+/* Icons */
+.contact i {
+margin-right: 10px;
+color: #e74c3c;
+transition: color 0.3s;
+}
+/* Buttons (Dark Mode Toggle & Print) */
+.dark-mode-toggle,
+.print-version-toggle {
+position: fixed;
+top: 20px;
+right: 20px;
+background-color: #e74c3c;
+color: #fff;
+border: none;
+border-radius: 50%;
+width: 40px;
+height: 40px;
+display: flex;
+justify-content: center;
+align-items: center;
+cursor: pointer;
+transition: background-color 0.3s, transform 0.3s;
+z-index: 100;
+}
+.print-version-toggle {
+top: 70px;
+}
+.dark-mode-toggle:hover,
+.print-version-toggle:hover {
+transform: scale(1.1);
+background-color: #000000;
+}
+.dark-mode .dark-mode-toggle:hover,
+.dark-mode .print-version-toggle:hover {
+background-color: #c0392b;
+}
+/* Cube Section */
+.cube-container {
+position: relative;
+width: 200px;
+height: 200px;
+perspective: 1000px;
+margin: 20px auto;
+margin-top: 40px;
+margin-bottom: 40px;
+}
+.cube {
+position: absolute;
+width: 200px;
+height: 200px;
+transform-style: preserve-3d;
+transform: rotateX(0deg) rotateY(0deg);
+transition: transform 3.3s ease-out;
+}
+.cube .face {
+position: absolute;
+width: 200px;
+height: 200px;
+border: 1px solid #999999;
+background: transparent;
+transition: background-color 0.5s ease, border-color 0.5s ease;
+}
+.dark-mode .cube .face {
+border-color: #444;
+background: transparent;
+}
+.face:nth-child(1) { transform: rotateY(0deg) translateZ(50px); }
+.face:nth-child(2) { transform: rotateX(90deg) translateZ(50px); }
+.face:nth-child(3) { transform: rotateY(90deg) translateZ(50px); }
+.face:nth-child(4) { transform: rotateY(180deg) translateZ(50px); }
+.face:nth-child(5) { transform: rotateY(270deg) translateZ(50px); }
+.face:nth-child(6) { transform: rotateX(-90deg) translateZ(50px); }
+.cube-text {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+font-size: 2em;
+font-weight: bold;
+}
+/* Media Queries */
+@media (max-width: 768px) {
+.top-section {
+flex-direction: column;
+}
+.left,
+.right {
+width: 100%;
+padding: 20px 0;
+border: none;
+}
+.left {
+border-bottom: 1px solid #ddd;
+margin-bottom: 20px;
+padding-right: 0;
+}
+.dark-mode .left {
+border-bottom: 1px solid #444;
+}
+#skills-in-main {
+display: block;
+}
+#skills-in-sidebar {
+display: none;
+}
+.cube-container {
+width: 120px;
+height: 120px;
+}
+.cube-text {
+font-size: 2em;
+}
+.face:nth-child(1) {
+transform: rotateY(0deg) translateZ(60px);
+}
+.face:nth-child(2) {
+transform: rotateX(90deg) translateZ(60px);
+}
+.face:nth-child(3) {
+transform: rotateY(90deg) translateZ(60px);
+}
+.face:nth-child(4) {
+transform: rotateY(180deg) translateZ(60px);
+}
+.face:nth-child(5) {
+transform: rotateY(-90deg) translateZ(60px);
+}
+.face:nth-child(6) {
+transform: rotateX(-90deg) translateZ(60px);
+}
+}
+@media (min-width: 769px) {
+#skills-in-main {
+display: none;
+}
+#skills-in-sidebar {
+display: block;
+}
+}
+/* Enhanced Print Styles */
+@media print {
+@page {
+size: letter;
+margin: 0.5in;
+}
+body {
+background-color: #fff !important;
+color: #000 !important;
+font-family: 'Georgia', 'Times New Roman', serif;
+font-size: 10pt;
+line-height: 1.3;
+margin: 0;
+padding: 0;
+}
+.dark-mode-toggle,
+.print-version-toggle,
+footer,
+.cube-container {
+display: none !important;
+}
+.container {
+padding: 0 !important;
+margin: 0 !important;
+max-width: 100% !important;
+}
+.resume {
+box-shadow: none !important;
+margin: 0 !important;
+padding: 0 !important;
+border: none !important;
+border-radius: 0 !important;
+max-width: 100% !important;
+width: 100% !important;
+background: transparent !important;
+}
+.top-section {
+display: none !important;
+}
+.left {
+display: none !important;
+}
+.right {
+display: none !important;
+}
+/* Custom print layout */
+#print-page-1,
+#print-page-2,
+#print-page-3 {
+display: block !important;
+}
+header { /* Hide the original header in print */
+display: none !important;
+}
+#print-name h1 {
+font-size: 22pt !important;
+margin-bottom: 0.1in !important; /* Reduced margin */
+text-align: center !important;
+font-weight: bold;
+letter-spacing: 0.5pt;
+color: #000 !important;
+}
+h2 {
+font-size: 13pt !important;
+border-bottom: 1.5pt solid #e74c3c !important;
+margin-top: 0.2in !important;
+margin-bottom: 0.1in !important;
+padding-bottom: 3pt !important;
+font-weight: bold;
+color: #e74c3c !important;
+text-transform: uppercase;
+letter-spacing: 0.5pt;
+page-break-after: avoid !important;
+}
+h3 {
+font-size: 11pt !important;
+margin-bottom: 0.05in !important;
+margin-top: 0.12in !important;
+font-weight: bold;
+color: #000 !important;
+page-break-after: avoid !important;
+}
+h3 .company,
+h3 .date {
+font-size: 9pt !important;
+font-weight: normal;
+color: #444 !important;
+margin-top: 1pt !important;
+display: inline !important;
+}
+h3 .company {
+font-style: italic;
+}
+h3 .date {
+font-style: normal;
+float: right;
+}
+section {
+margin-bottom: 0.15in !important;
+}
+p {
+margin-bottom: 0.05in !important;
+color: #000 !important;
+font-size: 10pt !important;
+text-align: justify;
+line-height: 1.3;
+}
+ul {
+margin-bottom: 0 !important;
+margin-top: 0.05in !important;
+}
+ul.bullet-list li,
+ul.skills li {
+padding-left: 1.3em !important;
+margin-bottom: 0.06in !important;
+line-height: 1.3;
+font-size: 9.5pt !important;
+text-align: left;
+page-break-inside: avoid;
+color: #000 !important; /* Ensures list item text is black for printing */
+}
+ul.bullet-list li::before,
+ul.skills li::before {
+content: "•" !important;
+color: #e74c3c !important; /* Bullet point color */
+font-size: 11pt !important;
+position: absolute;
+left: 0.2em;
+}
+ul.skills li strong {
+margin-bottom: 0.02in !important;
+font-size: 10pt !important;
+font-weight: bold;
+color: #000 !important;
+display: block;
+}
+ul.skills li span { /* For the text following the strong tag in skills */
+font-size: 9pt !important;
+color: #333 !important;
+display: block;
+line-height: 1.2;
+}
+/* Print specific content order */
+#print-name {
+display: block !important;
+page-break-after: avoid !important;
+}
+#print-contact {
+display: block !important;
+text-align: center !important;
+margin-bottom: 0.15in !important; /* Reduced margin */
+page-break-after: avoid !important;
+}
+#print-contact h2 { /* Hide the "Contact" h2 in print */
+display: none !important;
+}
+#print-contact ul {
+list-style: none !important;
+padding: 0 !important;
+margin: 0 !important;
+}
+#print-contact li {
+display: inline !important;
+margin: 0 0.08in !important; /* Reduced margin for tighter packing */
+padding: 0 !important;
+font-size: 9pt !important;
+color: #000 !important;
+}
+#print-contact li::before {
+display: none !important;
+}
+#print-contact li:not(:last-child)::after {
+content: " | " !important;
+color: #e74c3c !important;
+font-weight: normal; /* Lighter separator */
+padding-left: 0.08in; /* Spacing for separator */
+}
 
-            /* Hide the Skills section in the right column */
-            #skills {
-                display: none !important;
-            }
+/* Page 1: Name, Contact, Summary, Skills */
+#print-page-1 {
+display: block !important;
+page-break-after: always !important;
+}
+/* Page 2: Experience, Education, Certifications, References */
+#print-page-2 {
+display: block !important;
+}
+/* Hide Page 3 as it's not used with current content length */
+#print-page-3 {
+display: none !important;
+}
+#experience h3:first-child,
+#education h3:first-child, /* Assuming Education might be first on a page */
+#certifications h3:first-child, /* Assuming Certs might be first on a page */
+#references h3:first-child { /* Assuming Refs might be first on a page */
+margin-top: 0 !important;
+}
 
-            /* Show the Skills section in the left column */
-            #skills2 {
-                display: block !important;
-            }
-
-            /* Adjust the layout for printing */
-            .top-section {
-                flex-direction: column;
-            }
-
-            .left, .right {
-                width: 100%;
-                padding: 0;
-                border: none;
-            }
-
-            .left {
-                order: 2; /* Move the left column (with Skills) after the right column */
-            }
-
-            .right {
-                order: 1; /* Move the right column (with Summary) first */
-            }
-        }
-    
-        footer { text-align: center; padding: 10px 0; margin-top: 20px; background-color: #333; color: #fff; }
-        .dark-mode footer { background-color: #111; }
-    </style>
+#education ul.bullet-list li,
+#certifications ul.bullet-list li {
+margin-bottom: 0.05in !important;
+}
+/* Show full LinkedIn URL in print */
+#linkedinLinkPrint::after {
+content: " (linkedin.com/in/brittenf)" !important; /* Removed https:// for brevity if needed, but full is fine */
+font-size: 9pt !important; /* Matched contact li font size */
+color: #000 !important;
+}
+a { /* General link styling for print */
+color: #000 !important;
+text-decoration: none !important;
+font-weight: normal !important;
+}
+/* Hide the original layout elements not needed for print */
+.info-section,
+#skills-in-sidebar,
+#contact { /* Hides the sidebar contact section */
+display: none !important;
+}
+/* Display the print-specific skills (which is #skills-in-main) */
+#skills-in-main {
+display: block !important;
+}
+}
+footer {
+text-align: center;
+padding: 10px 0;
+margin-top: 20px;
+background-color: #333;
+color: #fff;
+}
+.dark-mode footer {
+background-color: #111;
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <button class="dark-mode-toggle" id="darkModeToggle"><i class="fas fa-moon"></i></button>
-        <button class="print-version-toggle" id="printVersionToggle"><i class="fas fa-print"></i></button>
-        <div class="resume">
-            <header><h1>Britten Falcher</h1></header>
-            <div class="top-section">
-                <div class="left">
-                    <div class="cube-container">
-                        <div class="cube" id="cube">
-                            <div class="face"></div>
-                            <div class="face"></div>
-                            <div class="face"></div>
-                            <div class="face"></div>
-                            <div class="face"></div>
-                            <div class="face"></div>
-                            <div class="cube-text">BF</div>
-                        </div>
-                    </div>
-                  
-                    <div class="info-section">
-                        <section id="contact" class="contact">
-                            <h2>Contact</h2>
-                            <ul>
-                                <li><i class="fas fa-map-marker-alt"></i> Miami-Fort Lauderdale</li>
-                                <li><i class="fas fa-envelope"></i> <a href="mailto:Britten@Bri-10.com">Britten@Bri-10.com</a></li>
-                                <li><i class="fas fa-phone"></i> <a href="tel:9542974891">954-297-4891</a></li>
-                                <li><i class="fab fa-linkedin"></i> <a href="https://linkedin.com/in/brittenf" target="_blank">Linkedin</a></li>
-                            </ul>
-                        </section>
-                        <section id="skills2" class="skills">
-                            <h2>Core Competencies</h2>
-                            <ul class="skills">
-                                <li>IT Infrastructure & Network Design</li>
-                                <li>Microsoft 365 & Active Directory Administration</li>
-                                <li>On-Site Server Implementation & Maintenance</li>
-                                <li>Cybersecurity Standards & Compliance</li>
-                                <li>Team Leadership & Staff Development</li>
-                                <li>Aruba Network Systems</li>
-                                <li>IT Policies, SOPs & Change Management</li>
-                                <li>Vendor Management & Contract Negotiation</li>
-                                <li>LAN/WAN, VLAN, VPN & Firewall Administration</li>
-                                <li>Cross-Platform Systems: Windows, Linux, macOS</li>
-                            </ul>
-                        </section>
-                    </div>
-                </div>
-                
-                <div class="right">
-                    <section id="summary">
-                        <h2>Professional Summary</h2>
-                        <p>Results-driven IT leader with over 9 years of experience managing and modernizing network infrastructure and systems in both private and military sectors. Proven track record in leading cross-functional teams, optimizing enterprise IT environments, enforcing cybersecurity standards, and driving strategic growth. Expertise in on-premise server management, Active Directory, network routing/switching, and vendor oversight. Adaptable, hands-on leader committed to uptime, security, and scalable IT architecture.</p>
-                    </section>
-                    <section id="experience">
-                        <h2>Professional Experience</h2>
-                        <h3>Director of Information Technology <span class="company">- Uniweld Products, Inc.</span> <span class="date">Jul 2022 – Present</span></h3>
-                        <ul class="bullet-list">
-                            <li>Lead enterprise-wide IT operations including infrastructure, security, and systems performance across physical locations.</li>
-                            <li>Implemented policies for endpoint/server/application security, aligned with regulatory standards and internal audits.</li>
-                            <li>Spearheaded IT cost-optimization projects that reduced system downtime and improved network speed and reliability.</li>
-                            <li>Provide executive counsel on long-term technology strategy, vendor relationships, and scalable systems architecture.</li>
-                        </ul>
-                        <h3>IT Manager <span class="company">- Uniweld Products, Inc.</span> <span class="date">Dec 2019 – Jul 2022</span></h3>
-                        <ul class="bullet-list">
-                            <li>Managed daily operations of the IT team, establishing performance goals and mentoring team members.</li>
-                            <li>Oversaw network administration including routing, switching, and VPN configuration.</li>
-                            <li>Led cross-departmental tech initiatives, including server upgrades, ERP integration, and helpdesk escalation improvements.</li>
-                            <li>Coordinated business continuity planning and cyber response strategies.</li>
-                        </ul>
-                        <h3>IT Administrator <span class="company">- Uniweld Products, Inc.</span> <span class="date">Aug 2015 – Dec 2019</span></h3>
-                        <ul class="bullet-list">
-                            <li>Maintained on-site servers and administered core systems including Active Directory and IFS ERP.</li>
-                            <li>Delivered Tier I/II support, implemented patches, and optimized system availability across departments.</li>
-                            <li>Improved hardware/software efficiency through preventive maintenance and structured rollout planning.</li>
-                        </ul>
-                        <h3>Directory Service Technician <span class="company">- United States Air Force</span> <span class="date">May 2011 – Sep 2012</span></h3>
-                        <ul class="bullet-list">
-                            <li>Administered global Active Directory, group policies, and secure object management for mission-critical systems.</li>
-                            <li>Performed network security scans and maintained DoD compliance in high-security environments.</li>
-                            <li>Resolved support tickets in a high-pressure, fast-paced setting while ensuring uptime and integrity.</li>
-                        </ul>
-                    </section>
-                    <section id="skills">
-                        <h2>Core Competencies</h2>
-                        <ul class="skills">
-                            <li>IT Infrastructure & Network Design</li>
-                            <li>Microsoft 365 & Active Directory Administration</li>
-                            <li>On-Site Server Implementation & Maintenance</li>
-                            <li>Cybersecurity Standards & Compliance</li>
-                            <li>Team Leadership & Staff Development</li>
-                            <li>Aruba Network Systems</li>
-                            <li>IT Policies, SOPs & Change Management</li>
-                            <li>Vendor Management & Contract Negotiation</li>
-                            <li>LAN/WAN, VLAN, VPN & Firewall Administration</li>
-                            <li>Cross-Platform Systems: Windows, Linux, macOS</li>
-                        </ul>
-                    </section>
-                    <section id="education">
-                        <h2>Education</h2>
-                        <ul class="bullet-list">
-                            <li>Information Technology Training, 81st Training Wing, Keesler AFB | 2011</li>
-                            <li>High School Diploma, South Plantation High School | 2010</li>
-                        </ul>
-                    </section>
-                    <section id="certifications">
-                        <h2>Certifications</h2>
-                        <ul class="bullet-list">
-                            <li>CompTIA Security+ (Expired 2014)</li>
-                            <li>Top Secret Security Clearance (Inactive)</li>
-                        </ul>
-                    </section>
-                    <section id="references">
-                        <h2>References</h2>
-                        <p>Available upon request.</p>
-                    </section>
-                </div>
-            </div>
-        </div>
-    </div>
-    <footer>
-        <p>&copy; Britten Falcher 2023</p>
-    </footer>
-    <script>
-        let angle = 0; // Start flat
-        let speed = 0;
-        let isHovered = false;
-        let tilt = 0; // Default tilt angle
-    
-        // Function to spin the cube
-        function spinCube() {
-            if (speed > 0) {
-                angle += speed;
-                document.getElementById('cube').style.transform = `rotateX(${tilt}deg) rotateY(${angle}deg)`;
-                requestAnimationFrame(spinCube);
-            }
-        }
-    
-        // Event listener for mouse entering the cube container
-        document.querySelector('.cube-container').addEventListener('mouseenter', () => {
-            isHovered = true;
-            tilt = -20; // Set tilt angle when hovered
-            speed = 2; // Start spinning
-            spinCube();
-        });
-    
-        // Event listener for mouse leaving the cube container
-        document.querySelector('.cube-container').addEventListener('mouseleave', () => {
-            isHovered = false;
-            let slowDown = setInterval(() => {
-                speed -= 0.05; // Gradually reduce speed
-                if (speed <= 0) {
-                    clearInterval(slowDown);
-                    speed = 0;
-                }
-            }, 10);
-        });
-    
-        // Gradually slow spin while hovered
-        setInterval(() => {
-            if (isHovered && speed > 0.05) {
-                speed -= 0.01;
-            }
-        }, 100);
-    
-        // Dark mode toggle functionality
-        const body = document.body;
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        darkModeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-        });
-    
-        // Print functionality for LinkedIn text change
-        const printVersionToggle = document.getElementById('printVersionToggle');
-        printVersionToggle.addEventListener('click', () => {
-            const linkedinElement = document.querySelector("#contact a[href*='linkedin']");
-            const originalText = linkedinElement.innerHTML;
-    
-            // Update the LinkedIn text
-            linkedinElement.innerHTML = "https://www.linkedin.com/in/brittenf/";
-    
-            // Trigger print
-            window.print();
-    
-            // Revert back to the original text after printing
-            setTimeout(() => {
-                linkedinElement.innerHTML = originalText;
-            }, 100);
-        });
-    </script>
+<div class="container">
+<button
+class="dark-mode-toggle"
+id="darkModeToggle"
+aria-label="Toggle dark mode"
+>
+<i class="fas fa-moon"></i>
+</button>
+<button
+class="print-version-toggle"
+id="printVersionToggle"
+aria-label="Print version"
+>
+<i class="fas fa-print"></i>
+</button>
+<div class="resume">
+<header>
+<h1>Britten Falcher</h1>
+</header>
+<div class="top-section">
+<div class="left">
+<div class="cube-container">
+<div class="cube" id="cube">
+<div class="face"></div>
+<div class="face"></div>
+<div class="face"></div>
+<div class="face"></div>
+<div class="face"></div>
+<div class="face"></div>
+<div class="cube-text">BF</div>
+</div>
+</div>
+<div class="info-section">
+<section id="contact" class="contact">
+<h2>Contact</h2>
+<ul class="bullet-list">
+<li><i class="fas fa-map-marker-alt"></i> Miami-Fort Lauderdale</li>
+<li>
+<i class="fas fa-envelope"></i>
+<a href="mailto:Britten@Bri-10.com">Britten@Bri-10.com</a>
+</li>
+<li>
+<i class="fas fa-phone"></i> <a href="tel:9542974891">954-297-4891</a>
+</li>
+<li>
+<i class="fab fa-linkedin"></i>
+<a href="https://linkedin.com/in/brittenf" target="_blank" id="linkedinLink"
+>LinkedIn</a
+>
+</li>
+</ul>
+</section>
+<section id="skills-in-sidebar" class="skills">
+<h2>Skills</h2>
+<ul class="skills">
+<li>
+<strong>Infrastructure & Systems:</strong>
+<span>Windows Server, Linux/Unix, macOS, VMware, Aruba switches, SAN, VPN</span>
+</li>
+<li>
+<strong>Network Administration:</strong>
+<span>LAN/WAN, VLANs, routing, switching, firewalls, site-to-site VPNs</span>
+</li>
+<li>
+<strong>Security & Compliance:</strong>
+<span>Active Directory, endpoint hardening, CMMC, vulnerability scanning, security policy development</span>
+</li>
+<li>
+<strong>Cloud & Software:</strong>
+<span>Microsoft 365, Azure AD, ERP administration (IFS), HTML/CSS</span>
+</li>
+<li>
+<strong>Leadership & Strategy:</strong>
+<span>Team leadership, vendor management, multi site coordination, IT roadmapping, change management</span>
+</li>
+</ul>
+</section>
+</div>
+</div>
+<div class="right">
+<section id="summary">
+<h2>Summary</h2>
+<p>
+Results driven IT leader with over 9 years of progressive experience managing infrastructure, cybersecurity, and enterprise systems across multisite environments. Proven success leading network and system administrators, optimizing IT operations, and implementing secure, scalable technology solutions. Adept at vendor management, team mentorship, and aligning IT strategy with business goals. Experienced with Aruba switches, Microsoft 365, and on premise server environments. Currently leading a company wide CMMC compliance initiative.
+</p>
+</section>
+<section id="experience">
+<h2>Professional Experience</h2>
+<h3>
+Director of Information Technology
+<span class="company">- Uniweld Products, Inc.</span>
+<span class="date">Jul 2022 – Present</span>
+</h3>
+<ul class="bullet-list">
+<li>Lead IT strategy and infrastructure across multiple facilities, ensuring scalability, security, and operational efficiency.</li>
+<li>Mentor and supervise IT team members, fostering growth and maintaining high performance.</li>
+<li>Define and enforce cybersecurity policies and compliance initiatives, including a current company wide CMMC compliance project.</li>
+<li>Manage vendor relationships and oversee IT procurement and service engagements.</li>
+<li>Advise senior leadership on technology investments, system architecture, and long term roadmaps.</li>
+<li>Administer and maintain Aruba network equipment and Microsoft 365 platform.</li>
+</ul>
+<h3>
+IT Manager
+<span class="company">- Uniweld Products, Inc.</span>
+<span class="date">Dec 2019 – Jul 2022</span>
+</h3>
+<ul class="bullet-list">
+<li>Directed daily IT operations and staff across three physical locations, standardizing infrastructure and support protocols.</li>
+<li>Oversaw network and server administration, ensuring high availability and system reliability.</li>
+<li>Implemented disaster recovery and business continuity plans to reduce risk and downtime.</li>
+<li>Coordinated projects involving server upgrades, software rollouts, and network enhancements.</li>
+<li>Ensured consistent cybersecurity posture by collaborating with external security consultants.</li>
+</ul>
+<h3>
+IT Administrator
+<span class="company">- Uniweld Products, Inc.</span>
+<span class="date">Aug 2015 – Dec 2019</span>
+</h3>
+<ul class="bullet-list">
+<li>Installed, configured, and supported Windows and Linux servers, user endpoints, and CNC integrated systems.</li>
+<li>Maintained Active Directory and ERP user administration, supporting productivity and compliance.</li>
+<li>Provided Tier I/II helpdesk support and trained users on systems and best practices.</li>
+<li>Contributed to hardware standardization and patch management processes across departments.</li>
+</ul>
+<h3>
+Directory Service Technician
+<span class="company">- United States Air Force</span>
+<span class="date">May 2011 – Sep 2012</span>
+</h3>
+<ul class="bullet-list">
+<li>Maintained secure DoD compliant network infrastructures and administered global Active Directory.</li>
+<li>Conducted vulnerability scans and participated in cybersecurity drills and protocol updates.</li>
+<li>Provided mission critical helpdesk and network support in high security environments.</li>
+</ul>
+</section>
+<section id="skills-in-main" class="skills"> <h2>Skills</h2>
+<ul class="skills">
+<li>
+<strong>Infrastructure & Systems:</strong>
+<span>Windows Server, Linux/Unix, macOS, VMware, Aruba switches, SAN, VPN</span>
+</li>
+<li>
+<strong>Network Administration:</strong>
+<span>LAN/WAN, VLANs, routing, switching, firewalls, site-to-site VPNs</span>
+</li>
+<li>
+<strong>Security & Compliance:</strong>
+<span>Active Directory, endpoint hardening, CMMC, vulnerability scanning, security policy development</span>
+</li>
+<li>
+<strong>Cloud & Software:</strong>
+<span>Microsoft 365, Azure AD, ERP administration (IFS), HTML/CSS</span>
+</li>
+<li>
+<strong>Leadership & Strategy:</strong>
+<span>Team leadership, vendor management, multi site coordination, IT roadmapping, change management</span>
+</li>
+</ul>
+</section>
+<section id="education">
+<h2>Education & Training</h2> <ul class="bullet-list">
+<li>Information Technology, 81st Training Wing, Keesler AFB | 2011</li> <li>High School Diploma, South Plantation High School | 2010</li>
+</ul>
+</section>
+<section id="certifications">
+<h2>Certifications</h2>
+<ul class="bullet-list">
+<li>CompTIA Security+ (Expired 2014)</li>
+<li>Top Secret Security Clearance (Inactive)</li>
+</ul>
+</section>
+<section id="references">
+<h2>References</h2>
+<p>Available upon request.</p>
+</section>
+</div>
+</div>
+<div id="print-page-1" style="display: none;">
+<div id="print-name">
+<h1>Britten Falcher</h1>
+</div>
+<div id="print-contact">
+<ul>
+<li>📍 Miami-Fort Lauderdale</li>
+<li>✉️ Britten@Bri-10.com</li>
+<li>📞 954-297-4891</li>
+<li id="linkedinLinkPrint">🔗</li>
+</ul>
+</div>
+<section id="summary-print"> <h2>Summary</h2>
+<p>
+Results driven IT leader with over 9 years of progressive experience managing infrastructure, cybersecurity, and enterprise systems across multi site environments. Proven success leading network and system administrators, optimizing IT operations, and implementing secure, scalable technology solutions. Adept at vendor management, team mentorship, and aligning IT strategy with business goals. Experienced with Aruba switches, Microsoft 365, and on-premise server environments. Currently leading a company wide CMMC compliance initiative.
+</p>
+</section>
+<section id="skills-print"> <h2>Skills</h2>
+<ul class="skills">
+<li>
+<strong>Infrastructure & Systems:</strong>
+<span>Windows Server, Linux/Unix, macOS, VMware, Aruba switches, SAN, VPN</span>
+</li>
+<li>
+<strong>Network Administration:</strong>
+<span>LAN/WAN, VLANs, routing, switching, firewalls, site to site VPNs</span>
+</li>
+<li>
+<strong>Security & Compliance:</strong>
+<span>Active Directory, endpoint hardening, CMMC, vulnerability scanning, security policy development</span>
+</li>
+<li>
+<strong>Cloud & Software:</strong>
+<span>Microsoft 365, Azure AD, ERP administration (IFS), HTML/CSS</span>
+</li>
+<li>
+<strong>Leadership & Strategy:</strong>
+<span>Team leadership, vendor management, multi site coordination, IT roadmapping, change management</span>
+</li>
+</ul>
+</section>
+</div>
+<div id="print-page-2" style="display: none;">
+<section id="experience-print"> <h2>Professional Experience</h2>
+<h3>
+Director of Information Technology
+<span class="company">- Uniweld Products, Inc.</span>
+<span class="date">Jul 2022 – Present</span>
+</h3>
+<ul class="bullet-list">
+<li>Lead IT strategy and infrastructure across multiple facilities, ensuring scalability, security, and operational efficiency.</li>
+<li>Mentor and supervise IT team members, fostering growth and maintaining high performance.</li>
+<li>Define and enforce cybersecurity policies and compliance initiatives, including a current company wide CMMC compliance project.</li>
+<li>Manage vendor relationships and oversee IT procurement and service engagements.</li>
+<li>Advise senior leadership on technology investments, system architecture, and long-term roadmaps.</li>
+<li>Administer and maintain Aruba network equipment and Microsoft 365 platform.</li>
+</ul>
+<h3>
+IT Manager
+<span class="company">- Uniweld Products, Inc.</span>
+<span class="date">Dec 2019 – Jul 2022</span>
+</h3>
+<ul class="bullet-list">
+<li>Directed daily IT operations and staff across three physical locations, standardizing infrastructure and support protocols.</li>
+<li>Oversaw network and server administration, ensuring high availability and system reliability.</li>
+<li>Implemented disaster recovery and business continuity plans to reduce risk and downtime.</li>
+<li>Coordinated projects involving server upgrades, software rollouts, and network enhancements.</li>
+<li>Ensured consistent cybersecurity posture by collaborating with external security consultants.</li>
+</ul>
+<h3>
+IT Administrator
+<span class="company">- Uniweld Products, Inc.</span>
+<span class="date">Aug 2015 – Dec 2019</span>
+</h3>
+<ul class="bullet-list">
+<li>Installed, configured, and supported Windows and Linux servers, user endpoints, and CNC integrated systems.</li>
+<li>Maintained Active Directory and ERP user administration, supporting productivity and compliance.</li>
+<li>Provided Tier I/II helpdesk support and trained users on systems and best practices.</li>
+<li>Contributed to hardware standardization and patch management processes across departments.</li>
+</ul>
+<h3>
+Directory Service Technician
+<span class="company">- United States Air Force</span>
+<span class="date">May 2011 – Sep 2012</span>
+</h3>
+<ul class="bullet-list">
+<li>Maintained secure DoD compliant network infrastructures and administered global Active Directory.</li>
+<li>Conducted vulnerability scans and participated in cybersecurity drills and protocol updates.</li>
+<li>Provided mission-critical helpdesk and network support in high security environments.</li>
+</ul>
+</section>
+<section id="education-print"> <h2>Education & Training</h2>
+<ul class="bullet-list">
+<li>Information Technology, 81st Training Wing, Keesler AFB | 2011</li>
+<li>High School Diploma, South Plantation High School | 2010</li>
+</ul>
+</section>
+<section id="certifications-print"> <h2>Certifications</h2>
+<ul class="bullet-list">
+<li>CompTIA Security+ (Expired 2014)</li>
+<li>Top Secret Security Clearance (Inactive)</li>
+</ul>
+</section>
+<section id="references-print"> <h2>References</h2>
+<p>Available upon request.</p>
+</section>
+</div>
+<div id="print-page-3" style="display: none;">
+</div>
+</div>
+</div>
+<footer>
+<p>&copy; Britten Falcher 2025</p>
+</footer>
+<script>
+// ========= Cube Animation =========
+let angle = 0;
+let speed = 0;
+let isHovered = false;
+let tilt = 0;
+const cubeElement = document.getElementById('cube');
+const cubeContainer = document.querySelector('.cube-container');
+function spinCube() {
+if (speed > 0 || isHovered) {
+angle += speed;
+let currentTilt = isHovered ? -20 : 0;
+if (!isHovered && tilt !== 0) {
+tilt += (0 - tilt) * 0.1;
+if (Math.abs(tilt) < 0.1) tilt = 0;
+} else if (isHovered) {
+tilt = -20;
+}
+if (cubeElement) {
+cubeElement.style.transform = `rotateX(${tilt}deg) rotateY(${angle}deg)`;
+}
+requestAnimationFrame(spinCube);
+} else {
+if (cubeElement) {
+cubeElement.style.transform = `rotateX(0deg) rotateY(${angle}deg)`;
+}
+}
+}
+if (cubeContainer) {
+cubeContainer.addEventListener('mouseenter', () => {
+isHovered = true;
+tilt = -20;
+if (speed <= 0) {
+speed = 1;
+} else {
+speed = Math.min(speed + 0.5, 2);
+}
+requestAnimationFrame(spinCube);
+});
+cubeContainer.addEventListener('mouseleave', () => {
+isHovered = false;
+let slowDownInterval = setInterval(() => {
+if (!isHovered && speed > 0) {
+speed -= 0.05;
+if (speed < 0) speed = 0;
+}
+if (speed <= 0 && Math.abs(tilt) < 0.1) {
+clearInterval(slowDownInterval);
+speed = 0;
+tilt = 0;
+if (cubeElement) {
+cubeElement.style.transform = `rotateX(0deg) rotateY(${angle}deg)`;
+}
+}
+if (isHovered) {
+clearInterval(slowDownInterval);
+}
+}, 20);
+});
+}
+// ========= Dark Mode Toggle =========
+const body = document.body;
+const darkModeToggle = document.getElementById('darkModeToggle');
+if (darkModeToggle) {
+darkModeToggle.addEventListener('click', () => {
+body.classList.toggle('dark-mode');
+if (body.classList.contains('dark-mode')) {
+localStorage.setItem('darkMode', 'enabled');
+darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+} else {
+localStorage.setItem('darkMode', 'disabled');
+darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+}
+});
+// On page load, check localStorage
+if (localStorage.getItem('darkMode') === 'enabled') {
+body.classList.add('dark-mode');
+darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+}
+}
+// ========= Print Button =========
+const printVersionToggle = document.getElementById('printVersionToggle');
+if (printVersionToggle) {
+printVersionToggle.addEventListener('click', () => {
+window.print();
+});
+}
+// IDs are now skills-in-sidebar and skills-in-main, no renaming script needed.
+// skills-in-main is for the main content area (visible on small screens, used for print)
+// skills-in-sidebar is for the sidebar (visible on large screens)
+</script>
 </body>
 </html>
