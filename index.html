@@ -506,15 +506,21 @@ padding-left: 0.08in; /* Spacing for separator */
 /* Page 1: Name, Contact, Summary, Skills */
 #print-page-1 {
 display: block !important;
-page-break-after: always !important;
+page-break-after: avoid !important; /* Changed from always to avoid */
 }
 /* Page 2: Experience, Education, Certifications, References */
 #print-page-2 {
 display: block !important;
+margin-top: 0 !important; /* Remove any top margin */
+padding-top: 0 !important; /* Remove any top padding */
 }
 /* Hide Page 3 as it's not used with current content length */
 #print-page-3 {
 display: none !important;
+}
+/* Remove excessive top margin from the first h2 in print-page-2 */
+#print-page-2 h2:first-child {
+margin-top: 0.15in !important; /* Reduced from 0.2in */
 }
 #experience h3:first-child,
 #education h3:first-child, /* Assuming Education might be first on a page */
@@ -547,6 +553,17 @@ display: none !important;
 /* Display the print-specific skills (which is #skills-in-main) */
 #skills-in-main {
 display: block !important;
+}
+/* Ensure skills section doesn't have excessive bottom margin */
+#skills-print {
+margin-bottom: 0.1in !important; /* Reduced margin */
+}
+#skills-print ul.skills {
+margin-bottom: 0 !important;
+}
+/* Ensure the last skill item doesn't have excessive bottom margin */
+#skills-print ul.skills li:last-child {
+margin-bottom: 0 !important;
 }
 }
 footer {
